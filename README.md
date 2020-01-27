@@ -46,7 +46,8 @@ I was quite a while thinking if only using board and modifying it's state or add
  
  However, for my first iteration I decided for the following model:
  
- /games
+ **_/games_**
+ 
     id: unique identifier for a game
     board: link to associated board
     width: number of cols the board has
@@ -55,12 +56,14 @@ I was quite a while thinking if only using board and modifying it's state or add
     remainingMines: number of remaining mines to uncover
     status: game state (won, lost, in progress)
     
-Possible Actions:
+_Possible Actions:_
+
     POST: Create new game
     GET: {id} Get a game's information
     GET: Get collection of games
     
-/game/{id}/board
+**_/game/{id}/board_**
+
     id: unique identifier for a game
     width: number of cols the board has
     height: number of cells the board has
@@ -68,10 +71,12 @@ Possible Actions:
     remainingMines: number of remaining mines to uncover
     cells: collection of board cells
 
-Possible Actions:
+_Possible Actions:_
+
     GET: Get the boards's information
     
-/game/{id}/board/cell  
+**_/game/{id}/board/cell**_  
+
     id: unique identifier for a cell
     x: row
     y: col
@@ -79,7 +84,8 @@ Possible Actions:
     adjacentMines: number of adjacent mines
     flag: true/false (has been flagged as mine)
 
-Possible Actions:
+_Possible Actions:_
+
     GET: {x,y} Get the cell information
     PUT: {x,y} Visit cell. Changes flag status or returns error is cell had mine
     
@@ -90,7 +96,15 @@ I also thought about what I had to do when creating a game:
  
 I decided before exposing any route with resources I'd first implement modules with the needed functionality and test them. Then I would expose whatever I needed.
 
-Whenever I begin a new proyect, the first thing I do is get a docker up and running. Then, I move forward. So... here I go.
+Whenever I begin a new project, the first thing I do is get a docker up and running. Then, I move forward. So... here I go.
+
+With dockerized dummy app ready, next step is generation of basic
+ functionality with TDD approach. What do I need to do? I need to be able to:
+* Create a new game
+* Create a board for the game --> generate all cells with random mine location and calculate number of adjacent mines for each cell
+* Modify cell --> uncover cell or add mine flag with corresponding status update of board and game
+* Get list of games
+ 
     
  
  
