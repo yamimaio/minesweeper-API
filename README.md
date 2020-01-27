@@ -104,6 +104,20 @@ With dockerized dummy app ready, next step is generation of basic
 * Create a board for the game --> generate all cells with random mine location and calculate number of adjacent mines for each cell
 * Modify cell --> uncover cell or add mine flag with corresponding status update of board and game
 * Get list of games
+
+### Run locally
+`docker-compose up`
+
+Access API on localhost:3000
+
+### Run Tests
+With docker
+
+`docker exec -it minesweeper-api_api_1 sh -c "npm run test"`
+
+Inside container or locally
+
+`npm run test`
  
     
  
