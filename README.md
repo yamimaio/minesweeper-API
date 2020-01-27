@@ -35,3 +35,66 @@ You do not need to fully complete the challenge. We suggest not to spend more th
 What we want to see is how well you handle yourself given the time you spend on the problem, how you think, and how you prioritize when time is insufficient to solve everything.
 
 Please email your solution as soon as you have completed the challenge or the time is up.
+
+## Development - Yamila Maio
+
+First things first, I had to think about the problem. As usual, I started doing some research. I even played minesweeper for quite a while (love the  game). 
+I came upon some minesweepers APIs but really did not like any previous implementation I found. Or maybe liked something but did not like other things about it.
+
+I figured the first thing I had to decide was "What are my resources?" The API should be able to access the game, the board and the cells. 
+I was quite a while thinking if only using board and modifying it's state or add cells as resources of the board and just modify cells. Using cells would allow me to have less data payload each time I visit a cell, but client library should have to keep state of all cells.
+ 
+ However, for my first iteration I decided for the following model:
+ 
+ /games
+    id: unique identifier for a game
+    board: link to associated board
+    width: number of cols the board has
+    height: number of cells the board has
+    mines: number of total mines
+    remainingMines: number of remaining mines to uncover
+    status: game state (won, lost, in progress)
+    
+Possible Actions:
+    POST: Create new game
+    GET: {id} Get a game's information
+    GET: Get collection of games
+    
+/game/{id}/board
+    id: unique identifier for a game
+    width: number of cols the board has
+    height: number of cells the board has
+    mines: number of total mines
+    remainingMines: number of remaining mines to uncover
+    cells: collection of board cells
+
+Possible Actions:
+    GET: Get the boards's information
+    
+/game/{id}/board/cell  
+    id: unique identifier for a cell
+    x: row
+    y: col
+    mine: true/false (has mine?)
+    adjacentMines: number of adjacent mines
+    flag: true/false (has been flagged as mine)
+
+Possible Actions:
+    GET: {x,y} Get the cell information
+    PUT: {x,y} Visit cell. Changes flag status or returns error is cell had mine
+    
+    
+I also thought about what I had to do when creating a game:
+ * Generate board with random location of mines
+ * Complete cell information with number of adjacent mines
+ 
+I decided before exposing any route with resources I'd first implement modules with the needed functionality and test them. Then I would expose whatever I needed.
+
+Whenever I begin a new proyect, the first thing I do is get a docker up and running. Then, I move forward. So... here I go.
+    
+ 
+ 
+ 
+ 
+
+
