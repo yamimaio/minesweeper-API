@@ -1,0 +1,20 @@
+{
+  "name": "minesweeper-api",
+  "version": "1.0.0",
+  "description": "MineSweeper API",
+  "author": "Yamila Maio <yamimaio@gmail.com>",
+  "repository": "to be defined",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "jest",
+    "dev": "nodemon ./src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "jest": "^25.1.0"
+  }
+}
