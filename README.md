@@ -60,9 +60,9 @@ _Possible Actions:_
 
     POST: Create new game
     GET: {id} Get a game's information
-    GET: Get collection of games
+    GET: Get collection of games -- Not priority initially
     
-**_/game/{id}/board_**
+**_/games/{id}/board_**
 
     id: unique identifier for a game
     width: number of cols the board has
@@ -75,7 +75,7 @@ _Possible Actions:_
 
     GET: Get the boards's information
     
-**_/game/{id}/board/cell**_  
+**_/games/{id}/board/cells**_  
 
     id: unique identifier for a cell
     x: row
@@ -86,6 +86,7 @@ _Possible Actions:_
 
 _Possible Actions:_
 
+    GET: Collection of cells
     GET: {x,y} Get the cell information
     PUT: {x,y} Visit cell. Changes flag status or returns error is cell had mine
     

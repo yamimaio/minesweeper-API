@@ -26,3 +26,12 @@ test('Create game with parameters must have given properties', () => {
   expect(game.remainingMines).toBe(25);
   expect(game.status).toBe('New Game');
 });
+
+test('Create game must return analog board', () => {
+  const game = new MinesweeperGame()
+  expect(game.board.height).toBe(20);
+  expect(game.board.width).toBe(15);
+  expect(game.board.mines).toBe(25);
+  expect(game.getRemainingMines()).toBe(25);
+  expect(game.getStatus).toBe('New Game');
+});
