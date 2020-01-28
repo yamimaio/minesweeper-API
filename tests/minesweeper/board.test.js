@@ -6,12 +6,13 @@
  remainingMines: number of remaining mines to uncover
  cells: 2D array of board cells
  **/
-const Board = require('../../src/minesweeper/board');
+const Board = require('../../src/minesweeper/board')
+const Cell = require('../../src/minesweeper/cell')
 
 describe('If a new board is created', () => {
   test('it should result in collections of rxc cells with the correct number of mines.' +
     'flag must be false for all mines, adjacent mines should be undefined for all', () => {
-    const board = new Board({width: 9, height: 9, mines: 10})
+    const board = new Board({ width: 9, height: 9, mines: 10 })
     expect(board.height).toBe(9)
     expect(board.width).toBe(9)
     expect(board.mines).toBe(10)
@@ -21,8 +22,9 @@ describe('If a new board is created', () => {
     board.cells.forEach(row => {
       expect(row.length).toBe(9)
       row.forEach(cell => {
+        expect(cell).toBeInstanceOf(Cell)
         expect(cell.flag).toBe(false)
-        expect(cell.adjacentMines).ToBe(undefined)
+        expect(cell.adjacentMines).toBe(undefined)
         if (cell.mine) mineCount++
       })
     })
@@ -91,4 +93,3 @@ describe('Flag cell should', () => {
     expect(board.remainingMines).toBe(8)
   })
 })
-

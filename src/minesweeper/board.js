@@ -5,13 +5,35 @@
  remainingMines: number of remaining mines to uncover
  cells: 2D array of board cells
  **/
+const Cell = require('./cell')
 
 module.exports = class Board {
-  constructor ({ width, height, mines}) {
+  constructor ({ width, height, mines }) {
     this.width = width
     this.height = height
     this.mines = mines
     this.remainingMines = mines
-    this.cells = []
+    this.cells = this.generateBoardCells(width, height)
+  }
+
+  /**
+   * Returns al cells of board
+   * @param width
+   * @param height
+   * @param mines
+   * @returns {[]}
+   */
+  generateBoardCells (width, height, mines) {
+    const cells = []
+    let id = 0
+    for (let x = 0; x < width; x++) {
+      let row = []
+      for (let y = 0; y < height; y++) {
+        row.push(new Cell({ id: id, x: x, y: y }))
+        id++
+      }
+      cells.push(row)
+    }
+    return cells
   }
 }

@@ -10,7 +10,8 @@ const Cell = require('../../src/minesweeper/cell');
 
 describe('If a new cell is created it should', () => {
   test('have correct values', () => {
-    const cell = new Cell({x: 8, y: 8})
+    const cell = new Cell({id: 0, x: 8, y: 8})
+    expect(cell.id).toBe(0)
     expect(cell.x).toBe(8)
     expect(cell.y).toBe(8)
     expect(cell.mine).toBe(false)

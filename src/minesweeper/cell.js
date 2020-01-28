@@ -1,4 +1,5 @@
 /**
+ id: int
  x: row
  y: col
  mine: true/false (has mine?)
@@ -6,7 +7,8 @@
  flag: true/false (has been flagged as mine)
  */
 module.exports = class Cell {
-  constructor ({x, y}) {
+  constructor ({id, x, y}) {
+    this.id = id
     this.x = x
     this.y = y
     this.mine = false
