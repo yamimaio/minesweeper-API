@@ -40,9 +40,17 @@ module.exports = class Board {
     return cells
   }
 
-
+  /**
+   * Randomly populates cells with given amount of mines
+   * @param totalCells
+   * @param mines
+   */
   populateMines (totalCells, mines) {
+    const numbers = [...Array(totalCells).keys()]
+    numbers.sort(() => Math.random() - 0.5)
+    const mineIds = numbers.slice(0, mines)
 
+    mineIds.map(id => this.findCell(id).mine = true)
   }
 
   /**
@@ -50,7 +58,7 @@ module.exports = class Board {
    * @param id
    * @returns Cell
    */
-  findCell(id) {
+  findCell (id) {
     const x = Math.floor(id / this.width)
     const y = id % this.width
     return this.cells[x][y]
