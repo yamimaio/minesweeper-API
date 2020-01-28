@@ -74,4 +74,24 @@ module.exports = class Board {
     return this.cells[x][y]
   }
 
+  /**
+   * Get's number of adjacent mines for a cell
+   * @param x
+   * @param y
+   * @returns {number}
+   */
+  getAdjacentMines (x, y) {
+    let mines = 0
+    for (let i = x - 1; i < x + 2; i++) {
+      for (let j = y - 1; j < y + 2; j++) {
+        if (this.cells[i] !== undefined && this.cells[i][j] !== undefined
+          && !(i === x && j === y) //don't count own mine
+          && this.cells[i][j].mine) {
+          mines++
+        }
+      }
+    }
+    return mines
+  }
+
 }

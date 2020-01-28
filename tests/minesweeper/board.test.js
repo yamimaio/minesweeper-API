@@ -41,27 +41,24 @@ describe('When getCell is called', () => {
 
 describe('When getAdjacentMines is called', () => {
   test('it should correctly calculate number of adjacent mines when present', () => {
-    const noMineCell = new Cell()
-    const mineCell = new Cell()
+    const noMineCell = new Cell({ id: 0, x: 8, y: 8 })
+    const mineCell = new Cell({ id: 0, x: 8, y: 8 })
     mineCell.mine = true
-    const grid = [
+    const board = new Board({ width: 3, height: 3, mines: 3 })
+    board.cells = [
       [mineCell, mineCell, noMineCell],
       [noMineCell, noMineCell, noMineCell],
       [noMineCell, mineCell, noMineCell]
     ]
-    const adjacentMines = getAdjacentMines(grid)
-    expect(adjacentMines).toBe(3)
-  })
-
-  test('it should return 0 if no adjacent mines', () => {
-    const noMineCell = new Cell()
-    const grid = [
-      [noMineCell, noMineCell, noMineCell],
-      [noMineCell, noMineCell, noMineCell],
-      [noMineCell, noMineCell, noMineCell]
-    ]
-    const adjacentMines = getAdjacentMines(grid)
-    expect(adjacentMines).toBe(0)
+    expect(board.getAdjacentMines(0, 0)).toBe(1)
+    expect(board.getAdjacentMines(0, 1)).toBe(1)
+    expect(board.getAdjacentMines(0, 2)).toBe(1)
+    expect(board.getAdjacentMines(1, 0)).toBe(3)
+    expect(board.getAdjacentMines(1, 1)).toBe(3)
+    expect(board.getAdjacentMines(1, 2)).toBe(2)
+    expect(board.getAdjacentMines(2, 0)).toBe(1)
+    expect(board.getAdjacentMines(2, 1)).toBe(0)
+    expect(board.getAdjacentMines(2, 2)).toBe(1)
   })
 })
 
