@@ -1,6 +1,6 @@
 module.exports = class NotFound extends Error {
-  constructor () {
-    super('Cell not found')
+  constructor (message = 'Cell not found') {
+    super(message)
     this.code = 404
   }
 }
