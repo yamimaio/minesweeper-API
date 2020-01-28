@@ -11,7 +11,9 @@ module.exports = class Cell {
     this.id = id
     this.x = x
     this.y = y
-    this.mine = false
+    //this.mine = false
+    //For playing via API purposes without mine spoiler when stringifying
+    Object.defineProperty(this, 'mine', { value: false, writable: true });
     this.adjacentMines = undefined
     this.flag = false
   }
