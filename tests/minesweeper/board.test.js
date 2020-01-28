@@ -93,3 +93,13 @@ describe('Flag cell should', () => {
     expect(board.remainingMines).toBe(8)
   })
 })
+
+describe('Find cell should', () => {
+  test('given an id return the corresponding Cell', () => {
+    const board = new Board({ width: 3, height: 3, mines: 9 })
+    const cell = board.findCell(5)
+    expect(cell).toBeInstanceOf(Cell)
+    expect(cell.x).toBe(1)
+    expect(cell.y).toBe(2)
+  })
+})

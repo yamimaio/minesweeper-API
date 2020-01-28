@@ -14,6 +14,8 @@ module.exports = class Board {
     this.mines = mines
     this.remainingMines = mines
     this.cells = this.generateBoardCells(width, height)
+
+    this.populateMines(width * height, mines)
   }
 
   /**
@@ -26,14 +28,31 @@ module.exports = class Board {
   generateBoardCells (width, height, mines) {
     const cells = []
     let id = 0
-    for (let x = 0; x < width; x++) {
+    for (let x = 0; x < height; x++) {
       let row = []
-      for (let y = 0; y < height; y++) {
+      for (let y = 0; y < width; y++) {
         row.push(new Cell({ id: id, x: x, y: y }))
         id++
       }
       cells.push(row)
     }
+
     return cells
+  }
+
+
+  populateMines (totalCells, mines) {
+
+  }
+
+  /**
+   * Given an id, returns the corresponding cell
+   * @param id
+   * @returns Cell
+   */
+  findCell(id) {
+    const x = Math.floor(id / this.width)
+    const y = id % this.width
+    return this.cells[x][y]
   }
 }
