@@ -127,4 +127,24 @@ module.exports = class Board {
     cell.flag = !cell.flag
     cell.flag ? this.remainingMines-- : this.remainingMines++
   }
+
+  /**
+   * Is the board fully revealed and all mines flagged?
+   * @returns {boolean}
+   */
+  isComplete() {
+    if (this.remainingMines !== 0) {
+      return false
+    }
+
+    for (let x = 0; x < this.height; x++) {
+      for (let y = 0; y < this.width; y++) {
+        if (!this.cells[x][y].flag && this.cells[x][y].adjacentMines === undefined) {
+          return false
+        }
+      }
+    }
+
+    return true
+  }
 }

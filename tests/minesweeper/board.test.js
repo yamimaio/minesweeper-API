@@ -111,3 +111,37 @@ describe('Find cell should', () => {
     expect(cell.y).toBe(2)
   })
 })
+
+describe('Board Complete should', () => {
+  test('return false if mines are still not flagged', () => {
+    const board = new Board({ width: 1, height: 1, mines: 1 })
+    expect(board.isComplete()).toBe(false)
+  })
+
+  test('return false if all mines are flagged but cells are not revealed', () => {
+    const board = new Board({ width: 2, height: 1, mines: 1 })
+    const noMineCell = new Cell({ id: 0, x: 8, y: 8 })
+    const mineCell = new Cell({ id: 0, x: 0, y: 8 })
+    mineCell.mine = true
+    mineCell.flag = true
+    board.remainingMines = 0
+    board.cells = [
+      [mineCell, noMineCell]
+    ]
+    expect(board.isComplete()).toBe(false)
+  })
+
+  test('return true if all mines are flagged and all cells are revealed', () => {
+    const board = new Board({ width: 2, height: 1, mines: 1 })
+    const noMineCell = new Cell({ id: 0, x: 8, y: 8 })
+    const mineCell = new Cell({ id: 0, x: 0, y: 8 })
+    mineCell.mine = true
+    mineCell.flag = true
+    noMineCell.adjacentMines = 1
+    board.remainingMines = 0
+    board.cells = [
+      [mineCell, noMineCell]
+    ]
+    expect(board.isComplete()).toBe(true)
+  })
+})
