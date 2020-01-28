@@ -84,12 +84,21 @@ describe('Visit cell should', () => {
 })
 
 describe('Flag cell should', () => {
-  test('set flag to true and change remainingMines number', () => {
+  test('if no flag, set flag to true and reduce remainingMines number', () => {
     //all cells have mines
-    const board = new Board('testId', 3, 3, 9)
+    const board = new Board({ width: 3, height: 3, mines: 9 })
     board.flag(2, 2)
     expect(board.getCell(2, 2).flag).toBe(true)
     expect(board.remainingMines).toBe(8)
+  })
+
+  test('if flag, set flag to false and increase remainingMines number', () => {
+    //all cells have mines
+    const board = new Board({ width: 3, height: 3, mines: 9 })
+    board.flag(2, 2)
+    board.flag(2, 2)
+    expect(board.getCell(2, 2).flag).toBe(false)
+    expect(board.remainingMines).toBe(9)
   })
 })
 

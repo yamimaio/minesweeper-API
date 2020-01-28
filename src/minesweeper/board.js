@@ -68,6 +68,7 @@ module.exports = class Board {
 
   /**
    * Given coords, returns the cell
+   * @throws NotFoundError if cell is not on board
    * @param x
    * @param y
    * @returns Cell
@@ -115,4 +116,15 @@ module.exports = class Board {
     cell.adjacentMines = this.getAdjacentMines(x, y)
   }
 
+  /**
+   * Toggles flag state on a cell and updates remaining mines info
+   * @throws NotFoundError if cell is not on board
+   * @param x
+   * @param y
+   */
+  flag (x, y) {
+    const cell = this.getCell(x, y)
+    cell.flag = !cell.flag
+    cell.flag ? this.remainingMines-- : this.remainingMines++
+  }
 }
