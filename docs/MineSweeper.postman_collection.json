@@ -18,11 +18,13 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/games",
+					"raw": "https://dry-hamlet-26176.herokuapp.com/games",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"dry-hamlet-26176",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"games"
 					]
@@ -38,13 +40,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"width\": 9,\n    \"height\": 9,\n    \"mines\": 10\n}",
+					"raw": "{\n    \"width\": 2,\n    \"height\": 1,\n    \"mines\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,11 +54,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/games",
+					"raw": "https://dry-hamlet-26176.herokuapp.com/games",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"dry-hamlet-26176",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"games"
 					]
@@ -70,17 +74,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/games/aba0a545-a29a-431c-8a2d-65d2152e665e/board/cell/{0,0}",
+					"raw": "https://dry-hamlet-26176.herokuapp.com/games/da443b6b-4c77-42b3-9e1a-23050f3996a7/board/cells/[0,1]",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"dry-hamlet-26176",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"games",
-						"aba0a545-a29a-431c-8a2d-65d2152e665e",
+						"da443b6b-4c77-42b3-9e1a-23050f3996a7",
 						"board",
-						"cell",
-						"{0,0}"
+						"cells",
+						"[0,1]"
 					]
 				}
 			},
@@ -89,10 +95,24 @@
 		{
 			"name": "Flag Cell",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "https://dry-hamlet-26176.herokuapp.com/games/da443b6b-4c77-42b3-9e1a-23050f3996a7/board/cells/[0,0]/flag",
+					"protocol": "https",
+					"host": [
+						"dry-hamlet-26176",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"games",
+						"da443b6b-4c77-42b3-9e1a-23050f3996a7",
+						"board",
+						"cells",
+						"[0,0]",
+						"flag"
+					]
 				}
 			},
 			"response": []

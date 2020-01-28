@@ -113,7 +113,6 @@ Once first iteration of Minesweeper Core functionality was ready, I then expose 
 
 Access API on localhost:3000
 
-Postman collection available in docs folder to test all endpoints
 
 ### Run Tests
 With docker
@@ -123,7 +122,11 @@ With docker
 Inside container or locally
 
 `npm run test`
- 
+
+### Run on Heroku
+`https://dry-hamlet-26176.herokuapp.com`
+
+Postman collection available in docs folder to test all endpoints and play
  
 ### Playing
 #### Start a new Game
