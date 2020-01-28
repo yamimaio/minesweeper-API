@@ -8,6 +8,8 @@
  **/
 const Board = require('../../src/minesweeper/board')
 const Cell = require('../../src/minesweeper/cell')
+const NotFoundError = require('../../src/minesweeper/errors/notFoundError')
+const MineExplodedError = require('../../src/minesweeper/errors/mineExplodedError')
 
 describe('If a new board is created', () => {
   test('it should result in collections of rxc cells with the correct number of mines.' +
@@ -64,20 +66,20 @@ describe('When getAdjacentMines is called', () => {
 
 describe('Visit cell should', () => {
   test('throw error if cell does not exist', () => {
-    const board = new Board('testId', 9, 9, 10)
-    board.visit(9, 9).toThrowError(NotFoundError)
+    const board = new Board({ width: 3, height: 3, mines: 3 })
+    expect(() => {board.visit(9, 9)}).toThrow(NotFoundError)
   })
 
   test('throw error if cell has a mine', () => {
     //all cells have mines
-    const board = new Board('testId', 3, 3, 9)
-    board.visit(2, 2).toThrowError(MineExplodedError)
+    const board = new Board({ width: 3, height: 3, mines: 9 })
+    expect(() => {board.visit(2, 2)}).toThrow(MineExplodedError)
   })
 
   test('should set number of adjacent mines if cell has no mine', () => {
-    const board = new Board('testId', 3, 3, 0)
+    const board = new Board({ width: 3, height: 3, mines: 0 })
     board.visit(2, 2)
-    expect(board.getCell(2, 2).adjacentMines).not.toBe(undefined)
+    expect(board.getCell(2, 2).adjacentMines).toBe(0)
   })
 })
 

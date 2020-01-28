@@ -6,6 +6,8 @@
  cells: 2D array of board cells
  **/
 const Cell = require('./cell')
+const NotFoundError = require('./errors/notFoundError')
+const MineExplodedError = require('./errors/mineExplodedError')
 
 module.exports = class Board {
   constructor ({ width, height, mines }) {
@@ -71,6 +73,9 @@ module.exports = class Board {
    * @returns Cell
    */
   getCell (x, y) {
+    if (x < 0 || x > this.height - 1 || y < 0 || y > this.width - 1) {
+      throw new NotFoundError()
+    }
     return this.cells[x][y]
   }
 
@@ -92,6 +97,15 @@ module.exports = class Board {
       }
     }
     return mines
+  }
+
+  visit (x, y) {
+    const cell = this.getCell(x, y)
+    if (cell.mine) {
+      throw new MineExplodedError()
+    }
+
+    cell.adjacentMines = this.getAdjacentMines(x, y)
   }
 
 }
