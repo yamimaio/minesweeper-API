@@ -40,12 +40,16 @@ app.get('/games/:gameId/board/cells/:coords', function (req, res, next) {
       throw new NotFoundError('Game not Found')
     }
 
-    if (game.status === 'Lost') {
+    if (['Lost', 'Won'].indexOf(game.status) !== -1) {
       res.status(409)
-      res.json({ code: 409, message: 'You have already lost. Stop visiting cells.'})
+      res.json({ code: 409, message: 'You have already ' + game.status + '. Stop visiting cells.' })
     }
 
     game.board.visit(coords[0], coords[1])
+    game.status = 'Playing'
+    if (game.board.isComplete()) {
+      game.status = 'Won'
+    }
     res.status(200)
     res.json(game)
   } catch (e) {
@@ -64,9 +68,9 @@ app.get('/games/:gameId/board/cells/:coords', function (req, res, next) {
 })
 
 app.put('/games/:gameId/board/cells/:coords/flag', function (req, res, next) {
-  if (game.status === 'Lost') {
+  if (['Lost', 'Won'].indexOf(game.status) !== -1) {
     res.status(409)
-    res.json({ code: 409, message: 'You have already lost. Stop flagging cells.'})
+    res.json({ code: 409, message: 'You have already ' + game.status + '. Stop flagging cells.' })
   }
 
   const gameId = req.params.gameId
@@ -79,6 +83,10 @@ app.put('/games/:gameId/board/cells/:coords/flag', function (req, res, next) {
       throw new NotFoundError('Game not Found')
     }
     game.board.flag(coords[0], coords[1])
+    game.status = 'Playing'
+    if (game.board.isComplete()) {
+      game.status = 'Won'
+    }
     res.status(200)
     res.json(game)
   } catch (e) {
