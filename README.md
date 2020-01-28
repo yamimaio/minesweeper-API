@@ -106,7 +106,10 @@ With dockerized dummy app ready, next step is generation of basic
 * Modify cell --> uncover cell or add mine flag with corresponding status update of board and game
 * Get list of games
 
-Once first iteration of Minesweeper Core functionality was ready, I then expose basic API endpoints
+Once first iteration of Minesweeper Core functionality was ready, I then expose basic API endpoints.
+
+I prioritized first Item in list: building API, trying to ignore extra features as list of games, persistence, etc. 
+Some of the additional features (configure board size and mines, detecting when game ends) were a very natural extension to what I had already built and came with nearly no extra cost. 
 
 ### Run locally
 `docker-compose up`
