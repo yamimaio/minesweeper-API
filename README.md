@@ -113,7 +113,7 @@ Once first iteration of Minesweeper Core functionality was ready, I then expose 
 
 Access API on localhost:3000
 
-Postman collection available in 
+Postman collection available in docs folder to test all endpoints
 
 ### Run Tests
 With docker
@@ -124,10 +124,46 @@ Inside container or locally
 
 `npm run test`
  
-    
  
- 
- 
- 
+### Playing
+#### Start a new Game
+Create a new game by POST to `/games`. 
 
+With no body default 9x9 and 10 mines will be created. 
 
+Sending JSON body with width, height and mines will create custom board. 
+
+Created game will show game status and complete board with no revealed cells.
+
+With the game ID you can then choose to visit a cell or flag a cell.
+
+As long as the server is not restarted you'll be able to play the last game you created.
+
+#### Visit a cell
+Visit a cell by GET to `/games/:gameId/board/cells/:coords`. 
+
+`gameId is the uuid you obtained when creating a game`
+`coords has the array format [x,y] of the cell you wish to visit`
+
+If you enter a cell out of the board, you'll get an error but will be able to continue playing.
+
+If the cell you visit has a mine you'll loose the game. Status will change to `Lost` and you won't be able to continue playing. Your only option will be to start a new game.
+
+If the cell you visit does not have a mine, you'll reveal the `adjacentMines` property of the cell which indicates the number of mines surrounding the cell. Status will change to `Playing` if it hand't yet changed. You'll always be able to see complete board information to continue playing
+
+#### Flag a cell
+Flag a cell by PUT to `/games/:gameId/board/cells/:coords/flag`. 
+
+`gameId is the uuid you obtained when creating a game`
+`coords has the array format [x,y] of the cell you wish to visit`
+
+If you enter a cell out of the board, you'll get an error but will be able to continue playing.
+
+Flagging toggles the flag on a cell. A cell with no flag will be flagged and a cell with a flag will be unflagged.
+
+When you flag a cell, the `remainingMines` property will be updated. 
+
+#### Wining the game
+Every time you flag or visit a cell, the game will check to see if the board is complete. A board is complete if there are no remaining mines to be flagged and if all non mine cells have been visited.
+
+Once you win a game, status will be updated to `Won` and you won't be able to continue playing.  Your only option will be to start a new game.
