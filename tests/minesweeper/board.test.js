@@ -34,7 +34,7 @@ describe('If a new board is created', () => {
 
 describe('When getCell is called', () => {
   test('it should return correct cell', () => {
-    const board = new Board('testId', 3, 3, 9)
+    const board = new Board({ width: 3, height: 3, mines: 9 })
     expect(board.getCell(2, 2)).toBe(board.cells[2][2])
   })
 })

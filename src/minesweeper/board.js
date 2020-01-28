@@ -63,4 +63,15 @@ module.exports = class Board {
     const y = id % this.width
     return this.cells[x][y]
   }
+
+  /**
+   * Given coords, returns the cell
+   * @param x
+   * @param y
+   * @returns Cell
+   */
+  getCell (x, y) {
+    return this.cells[x][y]
+  }
+
 }
