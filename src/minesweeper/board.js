@@ -99,6 +99,13 @@ module.exports = class Board {
     return mines
   }
 
+  /**
+   * Visits a cell and set number of adjacent cells
+   * @throws NotFoundError if cell is not on board
+   * @throws MineExplodedError if cell had a mine
+   * @param x
+   * @param y
+   */
   visit (x, y) {
     const cell = this.getCell(x, y)
     if (cell.mine) {
