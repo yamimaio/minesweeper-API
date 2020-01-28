@@ -6,6 +6,7 @@
  remainingMines: number of remaining mines to uncover
  status: game state (won, lost, in progress)**/
 const uuidv4 = require('uuid/v4')
+const Board = require('./board')
 
 module.exports = class MinesweeperGame {
   constructor ({ width = 9, height = 9, mines = 10 } = {}) {
@@ -13,7 +14,7 @@ module.exports = class MinesweeperGame {
     this.width = width
     this.height = height
     this.mines = mines
-    this.board = undefined
+    this.board = new Board({ width, height, mines })
     this.status = 'New Game'
   }
 
